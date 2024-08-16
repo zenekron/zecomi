@@ -18,9 +18,12 @@
     "build:node:cjs": "tsc --project ./tsconfig.node.cjs.json",
     "build:node:esm": "tsc --project ./tsconfig.node.esm.json",
     "build:types": "tsc --project ./tsconfig.types.json",
-    "check": "tsc"
+    "check": "run-p check:*",
+    "check:biome": "biome check",
+    "check:tsc": "tsc"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.8.3",
     "@tsconfig/node18": "^18.2.4",
     "@tsconfig/strictest": "^2.0.5",
     "npm-run-all2": "^6.2.2",
