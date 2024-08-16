@@ -1,0 +1,9 @@
+{
+  "extends": ["./tsconfig.base.json"],
+  "compilerOptions": {
+    "noEmit": true,
+
+    "module": "Node16",
+    "moduleResolution": "Node16"
+  }
+}
