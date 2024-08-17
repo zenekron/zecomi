@@ -50,4 +50,56 @@ describe("ServiceBuilder", () => {
       .toEqualTypeOf<Service<boolean, string>>();
     expectTypeOf(svc.build).returns.toEqualTypeOf<Service<string, string>>();
   });
+
+  it("preserves types", () => {
+    interface Base {
+      value: string;
+    }
+
+    interface Enhanced extends Base {
+      extra: number;
+    }
+
+    class TypeEnrichingMiddleware<O>
+      implements Middleware<Base, O, Enhanced, O>
+    {
+      public invoke(input: Base, next: Service<Enhanced, O>): O {
+        return next.invoke({ ...input, extra: 0 });
+      }
+    }
+
+    class TypeOverridingMiddleware<O> implements Middleware<Base, O, Base, O> {
+      public invoke(input: Base, next: Service<Base, O>): O {
+        return next.invoke(input);
+      }
+    }
+
+    class TypePreservingMiddleware<I extends Base, O>
+      implements Middleware<I, O, I, O>
+    {
+      public invoke(input: I, next: Service<I, O>): O {
+        return next.invoke(input);
+      }
+    }
+
+    // we transform `Base` into `Enhanced`
+    const a = ServiceBuilder.create<Base, string>().use(
+      new TypeEnrichingMiddleware(),
+    );
+    expectTypeOf(a.build)
+      .parameter(0)
+      .toEqualTypeOf<Service<Enhanced, string>>();
+
+    // `TypeOverridingMiddleware` discards the extra type information
+    const b = a.use(new TypeOverridingMiddleware());
+    expectTypeOf(b.build)
+      .not.parameter(0)
+      .toEqualTypeOf<Service<Enhanced, string>>();
+
+    // `TypePreservingMiddleware` preserves the extra type information
+    const c = a.use(new TypePreservingMiddleware());
+    expectTypeOf(c.build)
+      .parameter(0)
+      .toEqualTypeOf<Service<Enhanced, string>>();
+  });
 });
