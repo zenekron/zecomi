@@ -74,5 +74,5 @@
     // "preserveSymlinks": true,                         /* Disable resolving symlinks to their realpath. This correlates to the same flag in node. */
     "forceConsistentCasingInFileNames": true
   },
-  "exclude": ["./dist"]
+  "exclude": ["./coverage", "./dist"]
 }
