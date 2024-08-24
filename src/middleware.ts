@@ -1,22 +1,22 @@
 import type { Service } from "./service.js";
 import type { IsEqual } from "./util.js";
 
-export interface Middleware<I, O, IInput, IOutput> {
-  invoke(input: I, next: Service<IInput, IOutput>): O;
+export interface Middleware<EIn, EOut, IIn, IOut> {
+  invoke(input: EIn, next: Service<IIn, IOut>): EOut;
 }
 
-export type MiddlewareChain<I, O, IInput, IOutput> =
-  | (IsEqual<[I, O], [IInput, IOutput]> extends true ? [] : never)
-  | [Middleware<I, O, IInput, IOutput>]
+export type MiddlewareChain<EIn, EOut, IIn, IOut> =
+  | (IsEqual<[EIn, EOut], [IIn, IOut]> extends true ? [] : never)
+  | [Middleware<EIn, EOut, IIn, IOut>]
   | [
-      Middleware<I, O, unknown, unknown>,
+      Middleware<EIn, EOut, unknown, unknown>,
       ...Middleware<unknown, unknown, unknown, unknown>[],
-      Middleware<unknown, unknown, IInput, IOutput>,
+      Middleware<unknown, unknown, IIn, IOut>,
     ];
 
-export function mergeMiddlewareChains<I, O, II, OO, IInput, IOutput>(
-  a: MiddlewareChain<I, O, II, OO>,
-  b: MiddlewareChain<II, OO, IInput, IOutput>,
-): MiddlewareChain<I, O, IInput, IOutput> {
-  return [...a, ...b] as MiddlewareChain<I, O, IInput, IOutput>;
+export function mergeMiddlewareChains<EIn, EOut, MIn, MOut, IIn, IOut>(
+  a: MiddlewareChain<EIn, EOut, MIn, MOut>,
+  b: MiddlewareChain<MIn, MOut, IIn, IOut>,
+): MiddlewareChain<EIn, EOut, IIn, IOut> {
+  return [...a, ...b] as MiddlewareChain<EIn, EOut, IIn, IOut>;
 }
