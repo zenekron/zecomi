@@ -1,5 +1,29 @@
-import { describe, expectTypeOf, it } from "vitest";
+import { describe, expectTypeOf, it, test } from "vitest";
 import type { Middleware, MiddlewareChain } from "./middleware.js";
+
+describe("Middleware", () => {
+  test("assignability", () => {
+    const EXTRA = Symbol("extra");
+    type WithExtra<T extends object, E> = T & { [EXTRA]: E };
+
+    type In = Request;
+    type Out = Response;
+    type EIn = WithExtra<In, string>;
+    type EOut = WithExtra<Out, string>;
+
+    expectTypeOf<EIn>().toMatchTypeOf<In>();
+    expectTypeOf<In>().not.toMatchTypeOf<EIn>();
+
+    expectTypeOf<EOut>().toMatchTypeOf<Out>();
+    expectTypeOf<Out>().not.toMatchTypeOf<EOut>();
+
+    type M = Middleware<Request, Response, Request, Response>;
+    type EM = Middleware<EIn, Response, EIn, Response>;
+
+    expectTypeOf<EM>().toMatchTypeOf<M>();
+    expectTypeOf<M>().not.toMatchTypeOf<EM>();
+  });
+});
 
 describe("MiddlewareChain", () => {
   type StringMiddlewares = MiddlewareChain<string, string, string, string>;
