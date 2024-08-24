@@ -1,7 +1,7 @@
 {
   "name": "zecomi",
   "version": "0.0.0",
-  "description": "A simple, type-safe middleware framework.",
+  "description": "A simple, general-purpose and type-safe middleware library.",
   "keywords": [],
   "homepage": "https://github.com/zenekron/zecomi",
   "bugs": "https://github.com/zenekron/zecomi/issues",
