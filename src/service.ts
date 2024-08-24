@@ -8,24 +8,24 @@ export interface Service<I, O> {
   invoke(input: I): O;
 }
 
-export class ServiceBuilder<I, O, IInput, IOutput> {
+export class ServiceBuilder<EIn, EOut, IIn, IOut> {
   public static create<I, O>(): ServiceBuilder<I, O, I, O> {
     return new ServiceBuilder<I, O, I, O>([]);
   }
 
   private constructor(
-    private readonly middlewares: MiddlewareChain<I, O, IInput, IOutput>,
+    private readonly middlewares: MiddlewareChain<EIn, EOut, IIn, IOut>,
   ) {}
 
-  public use<II, OO>(
-    middleware: Middleware<IInput, IOutput, II, OO>,
-  ): ServiceBuilder<I, O, II, OO> {
+  public use<I, O>(
+    middleware: Middleware<IIn, IOut, I, O>,
+  ): ServiceBuilder<EIn, EOut, I, O> {
     return new ServiceBuilder(
       mergeMiddlewareChains(this.middlewares, [middleware]),
     );
   }
 
-  public build(service: Service<IInput, IOutput>): Service<I, O> {
+  public build(service: Service<IIn, IOut>): Service<EIn, EOut> {
     const middlewares: MiddlewareChain<unknown, unknown, unknown, unknown> =
       this.middlewares;
 
@@ -38,6 +38,6 @@ export class ServiceBuilder<I, O, IInput, IOutput> {
       service,
     );
 
-    return res as Service<I, O>;
+    return res as Service<EIn, EOut>;
   }
 }
