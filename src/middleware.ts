@@ -5,6 +5,9 @@ export interface Middleware<EIn, EOut, IIn, IOut> {
   invoke(input: EIn, next: Service<IIn, IOut>): EOut;
 }
 
+export interface AsyncMiddleware<EIn, EOut, IIn, IOut>
+  extends Middleware<EIn, Promise<EOut>, IIn, Promise<IOut>> {}
+
 export type MiddlewareChain<EIn, EOut, IIn, IOut> =
   | (IsEqual<[EIn, EOut], [IIn, IOut]> extends true ? [] : never)
   | [Middleware<EIn, EOut, IIn, IOut>]
