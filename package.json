@@ -22,7 +22,8 @@
     "check:biome": "biome check",
     "check:tsc": "tsc",
     "test": "vitest run --typecheck",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest watch --typecheck"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
