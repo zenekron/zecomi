@@ -12,7 +12,7 @@ describe("ServiceBuilder", () => {
     interface OrderOutput extends OrderInput {}
 
     class OrderMiddleware<I extends OrderInput, O extends OrderOutput>
-      implements Middleware<I, O, I, O>
+      implements Middleware<I, O>
     {
       public constructor(private readonly value: number) {}
 

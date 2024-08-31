@@ -9,9 +9,7 @@ import {
  * generates `Response`s, we might be tempted to write it as follows:
  */
 
-class MyMiddleware
-  implements AsyncMiddleware<Request, Response, Request, Response>
-{
+class MyMiddleware implements AsyncMiddleware<Request, Response> {
   public invoke(
     input: Request,
     next: Service<Request, Promise<Response>>,
@@ -64,7 +62,7 @@ ServiceBuilder.create<Request, Promise<Response>>()
  */
 
 class MyGenericMiddleware<I extends Request, O extends Response>
-  implements AsyncMiddleware<I, O, I, O>
+  implements AsyncMiddleware<I, O>
 {
   public invoke(input: I, next: Service<I, Promise<O>>): Promise<O> {
     return next.invoke(input);

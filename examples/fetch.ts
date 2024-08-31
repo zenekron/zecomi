@@ -9,7 +9,7 @@ import {
  * requests.
  */
 class AuthMiddleware<I extends Request, O extends Response>
-  implements AsyncMiddleware<I, O, I, O>
+  implements AsyncMiddleware<I, O>
 {
   /**
    * Getter that returns our auth token, the actual implementation would vary.

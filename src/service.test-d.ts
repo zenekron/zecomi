@@ -120,14 +120,14 @@ describe("ServiceBuilder", () => {
       }
     }
 
-    class TypeOverridingMiddleware<O> implements Middleware<Base, O, Base, O> {
+    class TypeOverridingMiddleware<O> implements Middleware<Base, O> {
       public invoke(input: Base, next: Service<Base, O>): O {
         return next.invoke(input);
       }
     }
 
     class TypePreservingMiddleware<I extends Base, O>
-      implements Middleware<I, O, I, O>
+      implements Middleware<I, O>
     {
       public invoke(input: I, next: Service<I, O>): O {
         return next.invoke(input);
