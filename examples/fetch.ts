@@ -34,8 +34,12 @@ const fetchService =
     // and finally provide the service that consumes inputs and returns outputs
     .build({ invoke: fetch });
 
-// any request made using our new `fetchService` will go through the
-// `AuthMiddleware` and will have its `Authorization` header populated.
-const response = await fetchService.invoke(new Request("/user"));
+async function main() {
+  // any request made using our new `fetchService` will go through the
+  // `AuthMiddleware` and will have its `Authorization` header populated.
+  const response = await fetchService.invoke(new Request("/user"));
 
-response.ok; // => true
+  response.ok; // => true
+}
+
+main().catch(console.error)
