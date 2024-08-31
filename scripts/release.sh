@@ -14,7 +14,7 @@ main() {
 
   echo "Updating '$packageFile'"
   jq \
-    --arg version "$version" \
+    --arg version "${version##*v}" \
     '.version = $version' \
     $packageFile |\
     sponge $packageFile
@@ -25,7 +25,7 @@ main() {
   echo "Creating release commit and tag"
   git add $packageFile $changelogFile
   git commit -m "chore(release): create release $version"
-  git tag "v$version"
+  git tag "$version"
 }
 
 cd "$SCRIPT_DIR/.."

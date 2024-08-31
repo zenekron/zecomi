@@ -63,6 +63,7 @@ commit_parsers = [
   { message = "^revert", group = "<!-- 7 -->Revert" },
   { message = "^(build|chore|ci)", skip = true },
 ]
+tag_pattern = "v[0-9].*"
 
 
 

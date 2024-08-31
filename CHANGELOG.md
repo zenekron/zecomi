@@ -46,7 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - create integration tests
 - create middleware assignability tests
 
-[0.2.0]: https://github.com/zenekron/zecomi/compare/vv0.1.1..vv0.2.0
-[0.1.1]: https://github.com/zenekron/zecomi/compare/v0.1.0..vv0.1.1
+[0.2.0]: https://github.com/zenekron/zecomi/compare/v0.1.1..v0.2.0
+[0.1.1]: https://github.com/zenekron/zecomi/compare/v0.1.0..v0.1.1
 [0.1.0]: https://github.com/zenekron/zecomi/tag/v0.1.0
 
