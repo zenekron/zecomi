@@ -43,7 +43,7 @@ class DateMiddleware
   }
 }
 
-ServiceBuilder.create<Request, Promise<Response>>()
+ServiceBuilder.createAsync<Request, Response>()
   .use(new DateMiddleware())
   // `input` is now `WithStartDate<Request>`
   .use(new MyMiddleware())
@@ -69,7 +69,7 @@ class MyGenericMiddleware<I extends Request, O extends Response>
   }
 }
 
-ServiceBuilder.create<Request, Promise<Response>>()
+ServiceBuilder.createAsync<Request, Response>()
   .use(new DateMiddleware())
   .use(new MyGenericMiddleware())
   .build({

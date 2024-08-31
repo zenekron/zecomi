@@ -17,6 +17,15 @@ export class ServiceBuilder<EIn, EOut, IIn, IOut> {
     return new ServiceBuilder<I, O, I, O>((service) => service);
   }
 
+  public static createAsync<I, O>(): ServiceBuilder<
+    I,
+    Promise<O>,
+    I,
+    Promise<O>
+  > {
+    return new ServiceBuilder((service) => service);
+  }
+
   private constructor(
     private readonly fn: (service: Service<IIn, IOut>) => Service<EIn, EOut>,
   ) {}

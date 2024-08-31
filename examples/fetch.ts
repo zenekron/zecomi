@@ -28,7 +28,7 @@ class AuthMiddleware<I extends Request, O extends Response>
 
 const fetchService =
   // we create a new ServiceBuilder
-  ServiceBuilder.create<Request, Promise<Response>>()
+  ServiceBuilder.createAsync<Request, Response>()
     // we chain a new instance of our `AuthMiddleware`
     .use(new AuthMiddleware())
     // and finally provide the service that consumes inputs and returns outputs
