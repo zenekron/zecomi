@@ -6,7 +6,7 @@ import type { Middleware } from "./middleware.js";
  *
  * @see {@link ./service.test-d.ts}
  */
-interface _Service<T extends (input: never) => unknown> {
+interface _Service<T extends (...args: never[]) => unknown> {
   invoke: T;
 }
 
