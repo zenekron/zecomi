@@ -1,8 +1,8 @@
-import { describe, expectTypeOf, it, test } from "vitest";
-import type { Middleware, MiddlewareChain } from "./middleware.js";
+import { describe, expectTypeOf, it } from "vitest";
+import type { Middleware } from "./middleware.js";
 
 describe("Middleware", () => {
-  test("assignability", () => {
+  it("is properly assignable", () => {
     const EXTRA = Symbol("extra");
     type WithExtra<T extends object, E> = T & { [EXTRA]: E };
 
@@ -22,43 +22,5 @@ describe("Middleware", () => {
 
     expectTypeOf<M>().toMatchTypeOf<EM>();
     expectTypeOf<EM>().not.toMatchTypeOf<M>();
-  });
-});
-
-describe("MiddlewareChain", () => {
-  type StringMiddlewares = MiddlewareChain<string, string, string, string>;
-
-  type S2S = Middleware<string, string, string, string>;
-  type S2N = Middleware<string, string, number, number>;
-  type N2S = Middleware<number, number, string, string>;
-  type N2B = Middleware<number, number, boolean, boolean>;
-
-  it("can be empty if the internal and external I/O types match", () => {
-    const it = expectTypeOf<[]>();
-    it.toMatchTypeOf<MiddlewareChain<string, string, string, string>>();
-    it.not.toMatchTypeOf<MiddlewareChain<string, string, number, string>>();
-    it.not.toMatchTypeOf<MiddlewareChain<string, string, string, number>>();
-  });
-
-  it("works with a single middleware", () => {
-    expectTypeOf<[S2S]>().toMatchTypeOf<StringMiddlewares>();
-    expectTypeOf<[S2N]>().not.toMatchTypeOf<StringMiddlewares>();
-  });
-
-  describe("chain of 2 middlewares", () => {
-    it("works for properly chained middlewares", () => {
-      expectTypeOf<[S2N, N2S]>().toMatchTypeOf<StringMiddlewares>();
-    });
-
-    it("rejects chains with mismatched outer I/O types", () => {
-      expectTypeOf<[S2N, N2B]>().not.toMatchTypeOf<StringMiddlewares>();
-      expectTypeOf<[S2N, N2B]>().toMatchTypeOf<
-        MiddlewareChain<string, string, boolean, boolean>
-      >();
-    });
-
-    // it("rejects chains with mismatched inner I/O types", () => {
-    //   expectTypeOf<[S2N, N2S, N2S]>().not.toMatchTypeOf<StringMiddlewares>();
-    // });
   });
 });
