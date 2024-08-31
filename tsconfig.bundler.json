@@ -6,5 +6,6 @@
     "target": "ESNext",
     "module": "Preserve",
     "moduleResolution": "Bundler"
-  }
+  },
+  "include": ["./src"]
 }
