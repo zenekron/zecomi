@@ -4,6 +4,10 @@ set -euo pipefail
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 
 main() {
+  pnpm run build
+  pnpm run check
+  pnpm run test
+
   local version
   version="$(git cliff --bumped-version)"
 
