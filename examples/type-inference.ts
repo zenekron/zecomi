@@ -1,7 +1,7 @@
 import {
-  ServiceBuilder,
   type AsyncMiddleware,
   type Service,
+  ServiceBuilder,
 } from "../src/index.js";
 
 /*!
