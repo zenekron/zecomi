@@ -1,13 +1,16 @@
 {
   "name": "zecomi",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A simple, general-purpose and type-safe middleware library.",
   "keywords": [],
   "homepage": "https://github.com/zenekron/zecomi",
   "bugs": "https://github.com/zenekron/zecomi/issues",
   "license": "(Apache-2.0 OR MIT)",
   "author": "zenekron",
-  "files": ["./dist", "./src"],
+  "files": [
+    "./dist",
+    "./src"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zenekron/zecomi.git"
