@@ -1,9 +1,12 @@
 import type { Service } from "./service.js";
 import type { IsEqual } from "./util.js";
 
-export interface Middleware<EIn, EOut, IIn, IOut> {
-  invoke(input: EIn, next: Service<IIn, IOut>): EOut;
-}
+type _Middleware<T extends (...args: never[]) => unknown> = {
+  invoke: T;
+};
+
+export interface Middleware<EIn, EOut, IIn, IOut>
+  extends _Middleware<(input: EIn, next: Service<IIn, IOut>) => EOut> {}
 
 export interface AsyncMiddleware<EIn, EOut, IIn, IOut>
   extends Middleware<EIn, Promise<EOut>, IIn, Promise<IOut>> {}

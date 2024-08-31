@@ -18,10 +18,10 @@ describe("Middleware", () => {
     expectTypeOf<Out>().not.toMatchTypeOf<EOut>();
 
     type M = Middleware<Request, Response, Request, Response>;
-    type EM = Middleware<EIn, Response, EIn, Response>;
+    type EM = Middleware<EIn, Response, Request, Response>;
 
-    expectTypeOf<EM>().toMatchTypeOf<M>();
-    expectTypeOf<M>().not.toMatchTypeOf<EM>();
+    expectTypeOf<M>().toMatchTypeOf<EM>();
+    expectTypeOf<EM>().not.toMatchTypeOf<M>();
   });
 });
 

@@ -4,9 +4,17 @@ import {
   mergeMiddlewareChains,
 } from "./middleware.js";
 
-export interface Service<I, O> {
-  invoke(input: I): O;
+/**
+ * This "trick" ensures that the type of `input` is properly treated as
+ * contravariant.
+ *
+ * @see {@link ./service.test-d.ts}
+ */
+interface _Service<T extends (input: never) => unknown> {
+  invoke: T;
 }
+
+export interface Service<I, O> extends _Service<(input: I) => O> {}
 
 export class ServiceBuilder<EIn, EOut, IIn, IOut> {
   public static create<I, O>(): ServiceBuilder<I, O, I, O> {
@@ -26,8 +34,8 @@ export class ServiceBuilder<EIn, EOut, IIn, IOut> {
   }
 
   public build(service: Service<IIn, IOut>): Service<EIn, EOut> {
-    const middlewares: MiddlewareChain<unknown, unknown, unknown, unknown> =
-      this.middlewares;
+    const middlewares  =
+      this.middlewares as MiddlewareChain<unknown, unknown, unknown, unknown>;
 
     const res = middlewares.reduceRight<Service<unknown, unknown>>(
       (prev, curr): Service<unknown, unknown> => ({
@@ -35,7 +43,7 @@ export class ServiceBuilder<EIn, EOut, IIn, IOut> {
           return curr.invoke(input, prev);
         },
       }),
-      service,
+      service as Service<unknown, unknown>,
     );
 
     return res as Service<EIn, EOut>;
