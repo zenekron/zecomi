@@ -21,6 +21,7 @@
     "check": "run-p check:*",
     "check:biome": "biome check",
     "check:tsc": "tsc",
+    "clean": "rm -rf ./dist",
     "test": "vitest run --typecheck",
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest watch --typecheck"
