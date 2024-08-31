@@ -16,6 +16,8 @@
               nodejs_18
               corepack_18
 
+              git-cliff
+
               nixd
               nixpkgs-fmt
             ];
