@@ -1,0 +1,55 @@
+{
+  "name": "zecomi",
+  "version": "0.0.0",
+  "description": "A simple, general-purpose and type-safe middleware library.",
+  "keywords": [],
+  "homepage": "https://github.com/zenekron/zecomi",
+  "bugs": "https://github.com/zenekron/zecomi/issues",
+  "license": "(Apache-2.0 OR MIT)",
+  "author": "zenekron",
+  "files": ["./dist", "./src"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zenekron/zecomi.git"
+  },
+  "scripts": {
+    "build": "run-p build:*",
+    "build:builder": "tsc --project ./tsconfig.bundler.json",
+    "build:node": "run-p build:node:*",
+    "build:node:cjs": "tsc --project ./tsconfig.node.cjs.json",
+    "build:node:esm": "tsc --project ./tsconfig.node.esm.json",
+    "build:types": "tsc --project ./tsconfig.types.json",
+    "check": "run-p check:*",
+    "check:biome": "biome check",
+    "check:tsc": "tsc",
+    "clean": "rm -rf ./dist",
+    "test": "vitest run --typecheck",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest watch --typecheck"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.8.3",
+    "@tsconfig/node18": "^18.2.4",
+    "@tsconfig/strictest": "^2.0.5",
+    "@types/node": "^18",
+    "@vitest/coverage-v8": "^2.0.5",
+    "npm-run-all2": "^6.2.2",
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
+  },
+  "type": "module",
+  "main": "./dist/node/esm/index.js",
+  "browser": "./dist/bundler/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "browser": "./dist/bundler/index.js",
+      "node": {
+        "import": "./dist/node/esm/index.js",
+        "require": "./dist/node/cjs/index.js"
+      },
+      "types": "./dist/types/index.d.ts"
+    }
+  },
+  "packageManager": "pnpm@9.6.0+sha512.38dc6fba8dba35b39340b9700112c2fe1e12f10b17134715a4aa98ccf7bb035e76fd981cf0bb384dfa98f8d6af5481c2bef2f4266a24bfa20c34eb7147ce0b5e"
+}

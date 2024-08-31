@@ -1,0 +1,10 @@
+/dist
+
+###  direnv  ###
+/.direnv
+
+###  node  ###
+/node_modules
+
+###  vitest  ###
+/coverage
