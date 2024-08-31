@@ -42,4 +42,4 @@ async function main() {
   response.ok; // => true
 }
 
-main().catch(console.error)
+main().catch(console.error);
