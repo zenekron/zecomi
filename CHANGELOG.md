@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1] - 2024-08-31
+
+### Bug Fixes
+
+- only include files in "src" in the published build
+
 ## [0.1.0] - 2024-08-31
 
 ### Features
@@ -29,5 +35,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - create integration tests
 - create middleware assignability tests
 
-[0.1.0]: https://github.com/zenekron/zecomi/tag/0.1.0
+[0.1.1]: https://github.com/zenekron/zecomi/compare/v0.1.0..v0.1.1
+[0.1.0]: https://github.com/zenekron/zecomi/tag/v0.1.0
 
