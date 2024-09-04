@@ -33,7 +33,7 @@ export class ServiceBuilder<EIn, EOut, IIn, IOut> {
    * Add a middleware to the current stack, this middleware will run after all
    * the previously added middlewares.
    */
-  public use<I, O>(
+  public use<I = IIn, O = IOut>(
     middleware: IntoMiddleware<IIn, IOut, I, O>,
   ): ServiceBuilder<EIn, EOut, I, O> {
     return new ServiceBuilder((service) =>
