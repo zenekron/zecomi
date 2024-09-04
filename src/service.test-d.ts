@@ -1,6 +1,6 @@
 import { describe, expectTypeOf, it } from "vitest";
 import type { Middleware } from "./middleware.js";
-import { type Service, ServiceBuilder } from "./service.js";
+import { type IntoService, type Service, ServiceBuilder } from "./service.js";
 
 class ParseIntMiddleware<I extends string, O>
   implements Middleware<I, O, number, O>
@@ -77,7 +77,7 @@ describe("ServiceBuilder", () => {
 
     expectTypeOf(svc.build)
       .parameter(0)
-      .toEqualTypeOf<Service<string, string>>();
+      .toEqualTypeOf<IntoService<string, string>>();
     expectTypeOf(svc.build).returns.toEqualTypeOf<Service<string, string>>();
   });
 
@@ -88,7 +88,7 @@ describe("ServiceBuilder", () => {
 
     expectTypeOf(svc.build)
       .parameter(0)
-      .toEqualTypeOf<Service<number, string>>();
+      .toEqualTypeOf<IntoService<number, string>>();
     expectTypeOf(svc.build).returns.toEqualTypeOf<Service<string, string>>();
   });
 
@@ -99,7 +99,7 @@ describe("ServiceBuilder", () => {
 
     expectTypeOf(svc.build)
       .parameter(0)
-      .toEqualTypeOf<Service<boolean, string>>();
+      .toEqualTypeOf<IntoService<boolean, string>>();
     expectTypeOf(svc.build).returns.toEqualTypeOf<Service<string, string>>();
   });
 
@@ -140,18 +140,18 @@ describe("ServiceBuilder", () => {
     );
     expectTypeOf(a.build)
       .parameter(0)
-      .toEqualTypeOf<Service<Enhanced, string>>();
+      .toEqualTypeOf<IntoService<Enhanced, string>>();
 
     // `TypeOverridingMiddleware` discards the extra type information
     const b = a.use(new TypeOverridingMiddleware());
     expectTypeOf(b.build)
       .not.parameter(0)
-      .toEqualTypeOf<Service<Enhanced, string>>();
+      .toEqualTypeOf<IntoService<Enhanced, string>>();
 
     // `TypePreservingMiddleware` preserves the extra type information
     const c = a.use(new TypePreservingMiddleware());
     expectTypeOf(c.build)
       .parameter(0)
-      .toEqualTypeOf<Service<Enhanced, string>>();
+      .toEqualTypeOf<IntoService<Enhanced, string>>();
   });
 });
