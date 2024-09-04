@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import type { Middleware } from "./middleware.js";
-import { type Service, ServiceBuilder } from "./service.js";
+import { ServiceBuilder } from "./service-builder.js";
+import type { Service } from "./service.js";
 
 describe("ServiceBuilder", () => {
   it("chains middlewares in the correct order", () => {
