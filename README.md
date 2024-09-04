@@ -36,10 +36,8 @@ class MyMiddleware<I, O> implements Middleware<I, O, I, O> {
 const myService = ServiceBuilder.create<I, O>()
   .use(new MyMiddleware())
   // ...
-  .build({
-    invoke(input: I): O {
-      // business logic that generates outputs from inputs
-    },
+  .build((input: I): O => {
+    // business logic that generates outputs from inputs
   });
 ```
 

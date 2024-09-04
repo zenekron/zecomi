@@ -48,12 +48,10 @@ ServiceBuilder.createAsync<Request, Response>()
   // `input` is now `WithStartDate<Request>`
   .use(new MyMiddleware())
   // `input` is `Request`, information was lost
-  .build({
-    // @ts-expect-error
-    invoke(input: WithStartDate<Request>) {
-      input;
-      throw new Error("not implemented");
-    },
+  // @ts-expect-error
+  .build((input: WithStartDate<Request>) => {
+    input;
+    throw new Error("not implemented");
   });
 
 /*!
@@ -72,9 +70,7 @@ class MyGenericMiddleware<I extends Request, O extends Response>
 ServiceBuilder.createAsync<Request, Response>()
   .use(new DateMiddleware())
   .use(new MyGenericMiddleware())
-  .build({
-    invoke(input: WithStartDate<Request>) {
+  .build((input: WithStartDate<Request>) =>{
       console.log(input.startedAt);
       throw new Error("not implemented");
-    },
   });

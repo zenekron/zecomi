@@ -32,7 +32,7 @@ const fetchService =
     // we chain a new instance of our `AuthMiddleware`
     .use(new AuthMiddleware())
     // and finally provide the service that consumes inputs and returns outputs
-    .build({ invoke: fetch });
+    .build(fetch);
 
 async function main() {
   // any request made using our new `fetchService` will go through the
