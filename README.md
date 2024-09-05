@@ -15,7 +15,7 @@ TODO: stars
 
 ## Introduction
 
-zecomi's let's you define and compose middlewares in a type-safe fashion while
+zecomi lets you define and compose middlewares in a type-safe fashion while
 making no assumptions about inputs, outputs or the type of computation being
 performed.
 
