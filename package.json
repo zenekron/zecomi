@@ -14,7 +14,7 @@
   },
   "scripts": {
     "build": "run-p build:*",
-    "build:builder": "tsc --project ./tsconfig.bundler.json",
+    "build:bundler": "tsc --project ./tsconfig.bundler.json",
     "build:node": "run-p build:node:*",
     "build:node:cjs": "tsc --project ./tsconfig.node.cjs.json",
     "build:node:esm": "tsc --project ./tsconfig.node.esm.json",
