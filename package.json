@@ -2,7 +2,7 @@
   "name": "zecomi",
   "version": "0.3.0",
   "description": "A simple, general-purpose and type-safe middleware library.",
-  "keywords": [],
+  "keywords": ["middleware"],
   "homepage": "https://github.com/zenekron/zecomi",
   "bugs": "https://github.com/zenekron/zecomi/issues",
   "license": "(Apache-2.0 OR MIT)",
